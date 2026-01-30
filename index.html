@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" style="background-image:url('gil (1).jpeg');background-size:cover;">
+
+<head>
+<meta charset="UTF-8">
+<title>Secure Login with Security Question</title>
+<link rel="stylesheet" href="gil.css">
+<style>
+body{
+ font-family: Arial, sans-serif;
+ color: white;
+}
+
+input, button{
+ padding:8px;
+ width:250px;
+ margin-bottom:10px;
+}
+
+button{
+ cursor:pointer;
+ font-weight:bold;
+}
+
+#loginSection{
+ display:none;
+}
+
+a{
+ color:cyan;
+ cursor:pointer;
+ text-decoration:underline;
+}
+</style>
+</head>
+
+<body>
+
+<h3>
+<marquee style="background-color:yellow;color:blue;">WELCOME TO MOSHA WEB</marquee>
+</h3>
+
+<!-- ================= CREATE ACCOUNT ================= -->
+<div id="createSection">
+<h3>CREATE ACCOUNT</h3>
+
+<label>USERNAME</label><br>
+<input type="text" id="username" placeholder="Create username"><br>
+
+<label>CREATE PASSWORD 🔑</label><br>
+<input type="password" id="createPassword" placeholder="Create password"><br>
+
+<label>CONFIRM PASSWORD 🔁</label><br>
+<input type="password" id="confirmPassword" placeholder="Confirm password"><br>
+
+<label>SECURITY QUESTION 🛡️ (e.g., What is your pet's name?)</label><br>
+<input type="text" id="securityAnswer" placeholder="Enter your answer"><br>
+
+<button onclick="saveAccount()">SAVE ACCOUNT</button>
+<p id="saveMsg"></p>
+
+<p>Already have an account? <a onclick="showLogin()">Log in</a></p>
+</div>
+
+<hr>
+
+<!-- ================= LOGIN ================= -->
+<div id="loginSection">
+<h3>LOGIN HERE 🔐</h3>
+
+<input type="text" id="loginUser" placeholder="Username"><br>
+<input type="password" id="loginPass" placeholder="Password"><br>
+
+<button onclick="login()">LOG IN</button>
+<p id="loginMsg"></p>
+
+<p style="color:cyan;cursor:pointer;" onclick="forgotPassword()">Forgot Password?</p>
+<p id="forgotMsg"></p>
+
+<p>Don't have an account? <a onclick="showRegister()">Create one</a></p>
+</div>
+
+<script>
+function saveAccount(){
+ let u = document.getElementById("username").value;
+ let p1 = document.getElementById("createPassword").value;
+ let p2 = document.getElementById("confirmPassword").value;
+ let sa = document.getElementById("securityAnswer").value;
+ let saveMsg = document.getElementById("saveMsg");
+
+ if(!u || !p1 || !p2 || !sa){
+   saveMsg.innerHTML="⚠️ Jaza kila kitu";
+   saveMsg.style.color="red";
+   return;
+ }
+ if(p1 !== p2){
+   saveMsg.innerHTML="❌ Password hazifanani";
+   saveMsg.style.color="red";
+   return;
+ }
+
+ // Save user, password and security answer
+ localStorage.setItem("user", u);
+ localStorage.setItem("pass", p1);
+ localStorage.setItem("secAns", sa.toLowerCase());
+
+ saveMsg.innerHTML="✅ Account created successfully";
+ saveMsg.style.color="lime";
+
+ // Switch to login
+ showLogin();
+}
+
+function login(){
+ let u = document.getElementById("loginUser").value;
+ let p = document.getElementById("loginPass").value;
+ let loginMsg = document.getElementById("loginMsg");
+
+ let su = localStorage.getItem("user");
+ let sp = localStorage.getItem("pass");
+
+ if(u===su && p===sp){
+   loginMsg.innerHTML="✅ Login successful... Redirecting";
+   loginMsg.style.color="lime";
+   setTimeout(()=> window.location.href="web.html", 1500);
+ }else{
+   loginMsg.innerHTML="❌ Wrong username or password";
+   loginMsg.style.color="red";
+ }
+}
+
+function forgotPassword(){
+ let su = localStorage.getItem("user");
+ let sp = localStorage.getItem("pass");
+ let sa = localStorage.getItem("secAns");
+ let forgotMsg = document.getElementById("forgotMsg");
+
+ if(!su){
+   forgotMsg.innerHTML="⚠️ No account found";
+   forgotMsg.style.color="red";
+   return;
+ }
+
+ let answer = prompt("Security Question: What is your pet's name?");
+ if(answer && answer.toLowerCase() === sa){
+   forgotMsg.innerHTML = `✅ Your password is: <b>${sp}</b>`;
+   forgotMsg.style.color="yellow";
+ }else{
+   forgotMsg.innerHTML = "❌ Wrong answer to security question";
+   forgotMsg.style.color="red";
+ }
+}
+
+// Show login/register
+function showLogin(){
+ document.getElementById("createSection").style.display="none";
+ document.getElementById("loginSection").style.display="block";
+}
+function showRegister(){
+ document.getElementById("loginSection").style.display="none";
+ document.getElementById("createSection").style.display="block";
+}
+</script>
+
+</body>
+</html>
