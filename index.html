@@ -13,6 +13,7 @@ body{
  justify-content:center;
  align-items:center;
  color:white;
+ padding: 20px; /* Imeongezwa ili isibane juu na chini */
 }
 
 h1{
@@ -21,11 +22,11 @@ h1{
  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
-a{
+a.button-link{ /* Nimeipa class ili isivuruge link za mawasiliano */
  display:block;
  background:rgba(255,255,255,0.2);
  padding:15px 30px;
- margin:15px 0;
+ margin:10px 0;
  color:white;
  font-size:20px;
  text-decoration:none;
@@ -36,9 +37,45 @@ a{
  width:250px;
 }
 
-a:hover{
+a.button-link:hover{
  background:rgba(255,255,255,0.4);
  transform:scale(1.05);
+}
+
+/* Style ya Sehemu ya Comment */
+.comment-section {
+ background: white;
+ color: #333;
+ padding: 20px;
+ border-radius: 10px;
+ margin-top: 20px;
+ width: 310px;
+ box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.comment-section input, .comment-section textarea {
+ width: 100%;
+ padding: 10px;
+ margin: 10px 0;
+ border: 1px solid #ccc;
+ border-radius: 5px;
+ box-sizing: border-box; /* Inazuia kisanduku kutoka nje */
+}
+
+.comment-section button {
+ background: #0072ff;
+ color: white;
+ border: none;
+ padding: 10px;
+ width: 100%;
+ border-radius: 5px;
+ cursor: pointer;
+ font-weight: bold;
+ transition: 0.3s;
+}
+
+.comment-section button:hover {
+ background: #00c6ff;
 }
 </style>
 </head>
@@ -46,11 +83,11 @@ a:hover{
 
 <h1>Mosha Website Qn</h1>
 
-<!-- Links to Questions -->
-<a href="htmlq.html" target="_blank">HTML Questions (101)</a>
-<a href="programq.html" target="_blank">Programming Questions (50)</a>
-<a href="database.html" target="_blank">Database Questions (50)</a>
- <div style="font-family: Arial, sans-serif; padding: 20px; border-radius: 10px; background-color: #f4f4f9; max-width: 350px;">
+<a href="htmlq.html" target="_blank" class="button-link">HTML Questions (101)</a>
+<a href="programq.html" target="_blank" class="button-link">Programming Questions (50)</a>
+<a href="database.html" target="_blank" class="button-link">Database Questions (50)</a>
+
+ <div style="font-family: Arial, sans-serif; padding: 20px; border-radius: 10px; background-color: #f4f4f9; max-width: 350px; margin-top: 20px;">
   <h2 style="color: #333; border-bottom: 2px solid #ddd; padding-bottom: 10px;">Mawasiliano</h2>
   
   <p style="margin: 10px 0;">
@@ -68,7 +105,15 @@ a:hover{
     <span style="color: #555;">0783983518</span>
   </p>
  </div>
- 
 
+ <div class="comment-section">
+    <h3 style="margin-top:0;">Niachie Comment</h3>
+    <form action="https://formspree.io/f/WEKA_ID_YAKO_HAPA" method="POST">
+        <input type="text" name="jina" placeholder="Jina lako" required>
+        <textarea name="comment" placeholder="Andika kitu hapa..." rows="4" required></textarea>
+        <button type="submit">Tuma Comment</button>
+    </form>
+ </div>
+ 
 </body>
 </html>
