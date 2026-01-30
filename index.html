@@ -13,16 +13,17 @@ body{
  justify-content:center;
  align-items:center;
  color:white;
- padding: 20px; /* Imeongezwa ili isibane juu na chini */
+ padding: 20px;
 }
 
 h1{
  font-size:36px;
  margin-bottom:30px;
  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+ text-align: center;
 }
 
-a.button-link{ /* Nimeipa class ili isivuruge link za mawasiliano */
+a.button-link{
  display:block;
  background:rgba(255,255,255,0.2);
  padding:15px 30px;
@@ -42,26 +43,84 @@ a.button-link:hover{
  transform:scale(1.05);
 }
 
-/* Style ya Sehemu ya Comment */
-.comment-section {
+/* Style mpya ya sehemu ya Comment kupitia WhatsApp */
+.comment-box {
  background: white;
  color: #333;
- padding: 20px;
+ padding: 25px;
+ border-radius: 15px;
+ margin-top: 25px;
+ width: 300px;
+ box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+ text-align: center;
+}
+
+.whatsapp-btn {
+ display: inline-block;
+ background-color: #25D366;
+ color: white;
+ padding: 15px 20px;
+ text-decoration: none;
  border-radius: 10px;
+ font-weight: bold;
+ margin-top: 15px;
+ transition: 0.3s;
+ box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+}
+
+.whatsapp-btn:hover {
+ background-color: #128C7E;
+ transform: translateY(-3px);
+}
+
+.contact-info {
+ font-family: Arial, sans-serif; 
+ padding: 20px; 
+ border-radius: 10px; 
+ background-color: #f4f4f9; 
+ max-width: 350px; 
  margin-top: 20px;
- width: 310px;
- box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+ color: #333;
 }
+</style>
+</head>
+<body>
 
-.comment-section input, .comment-section textarea {
- width: 100%;
- padding: 10px;
- margin: 10px 0;
- border: 1px solid #ccc;
- border-radius: 5px;
- box-sizing: border-box; /* Inazuia kisanduku kutoka nje */
-}
+<h1>Mosha Website Qn</h1>
 
+<a href="htmlq.html" target="_blank" class="button-link">HTML Questions (101)</a>
+<a href="programq.html" target="_blank" class="button-link">Programming Questions (50)</a>
+<a href="database.html" target="_blank" class="button-link">Database Questions (50)</a>
+
+<div class="contact-info">
+  <h2 style="border-bottom: 2px solid #ddd; padding-bottom: 10px;">Mawasiliano</h2>
+  
+  <p style="margin: 10px 0;">
+    <strong style="color: #25D366;">WhatsApp:</strong> 
+    <span style="color: #555;">0793770731</span>
+  </p>
+  
+  <p style="margin: 10px 0;">
+    <strong style="color: #D44638;">Email:</strong> 
+    <a href="mailto:kingshamo47@gmail.com" style="color: #555; text-decoration: none;">kingshamo47@gmail.com</a>
+  </p>
+  
+  <p style="margin: 10px 0;">
+    <strong style="color: #007AFF;">Simu (Tal):</strong> 
+    <span style="color: #555;">0783983518</span>
+  </p>
+ </div>
+
+ <div class="comment-box">
+    <h3 style="margin-top:0;">Tuachie Maoni</h3>
+    <p style="font-size: 14px; color: #666;">Bonyeza hapa chini kutuma maoni yako moja kwa moja kwenda WhatsApp.</p>
+    <a href="https://wa.me/255793770731?text=Habari%20Mosha,%20naacha%20maoni%20yangu%20hapa:" class="whatsapp-btn" target="_blank">
+        Tuma Maoni (WhatsApp)
+    </a>
+ </div>
+ 
+</body>
+</html>
 .comment-section button {
  background: #0072ff;
  color: white;
