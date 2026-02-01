@@ -1,0 +1,125 @@
+<div class="main-container" style="border: 2px solid #6200ea; background: #0a0a0a; padding: 15px; border-radius: 12px; font-family: sans-serif;">
+    <span style="color: #6200ea; font-weight: bold; border-left: 4px solid #6200ea; padding-left: 8px;">DEV STUDIO PRO</span>
+
+    <div style="display: flex; gap: 4px; margin: 12px 0; background: #1a1a1a; padding: 4px; border-radius: 8px;">
+        <button onclick="setTab('html')" id="bt-html" style="flex:1; padding:10px; background: #6200ea; color:white; border:none; border-radius: 6px; cursor:pointer; font-weight:bold;">HTML</button>
+        <button onclick="setTab('css')" id="bt-css" style="flex:1; padding:10px; background: #222; color:white; border:none; border-radius: 6px; cursor:pointer; font-weight:bold;">CSS</button>
+        <button onclick="setTab('c')" id="bt-c" style="flex:1; padding:10px; background: #222; color:white; border:none; border-radius: 6px; cursor:pointer; font-weight:bold;">C PROG</button>
+    </div>
+
+    <div id="area-html">
+        <textarea id="in-html" spellcheck="false" placeholder="Weka sehemu husika (HTML)" style="width: 100%; height: 160px; background: #000; color: #fff; font-family: monospace; padding: 10px; border: 1px solid #333; border-radius: 8px; resize: none; box-sizing: border-box;">
+<div class="welcome-box">
+  <h1>Hello Welcome</h1>
+  <p>Kodi yako inafanya kazi!</p>
+</div></textarea>
+    </div>
+
+    <div id="area-css" style="display: none;">
+        <textarea id="in-css" spellcheck="false" placeholder="Weka sehemu husika (CSS)" style="width: 100%; height: 160px; background: #000; color: #ff00ff; font-family: monospace; padding: 10px; border: 1px solid #333; border-radius: 8px; resize: none; box-sizing: border-box;">
+.welcome-box {
+  text-align: center;
+  padding: 20px;
+  background: #222;
+  border: 2px solid #00c853;
+  border-radius: 10px;
+}
+h1 { color: #00c853; }</textarea>
+    </div>
+
+    <div id="area-c" style="display: none;">
+        <textarea id="in-c" spellcheck="false" placeholder="Weka sehemu husika (C Code)" style="width: 100%; height: 160px; background: #000; color: #00e5ff; font-family: monospace; padding: 10px; border: 1px solid #333; border-radius: 8px; resize: none; box-sizing: border-box;">
+#include <stdio.h>
+
+int main() {
+    printf("Hello Welcome to C Programming!");
+    return 0;
+}</textarea>
+    </div>
+
+    <div style="display: flex; gap: 6px; margin-top: 12px;">
+        <button onclick="executeCode()" style="flex: 2; padding: 14px; background: #00c853; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">RUN CODE</button>
+        <button onclick="saveProject()" style="flex: 1.2; background: #2979ff; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">SAVE AS</button>
+        <button onclick="resetEditor()" style="flex: 1; background: #444; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">FUTA</button>
+    </div>
+
+    <div id="output-container" style="display: none; margin-top: 15px; border-top: 1px solid #333; padding-top: 10px;">
+        <div style="color: #888; font-size: 11px; margin-bottom: 5px;">OUTPUT:</div>
+        <div id="web-wrapper">
+             <iframe id="web-res" style="width: 100%; height: 180px; background: white; border-radius: 8px; border: none;"></iframe>
+        </div>
+        <div id="c-res" style="display: none; width: 100%; min-height: 80px; background: #000; color: #0f0; font-family: monospace; padding: 12px; border-radius: 8px; border: 1px solid #333;"></div>
+    </div>
+</div>
+
+<script>
+    let mode = 'html';
+
+    function setTab(t) {
+        mode = t;
+        document.getElementById('area-html').style.display = (t === 'html' ? 'block' : 'none');
+        document.getElementById('area-css').style.display = (t === 'css' ? 'block' : 'none');
+        document.getElementById('area-c').style.display = (t === 'c' ? 'block' : 'none');
+        
+        ['html', 'css', 'c'].forEach(item => {
+            document.getElementById('bt-' + item).style.background = (t === item ? '#6200ea' : '#222');
+        });
+    }
+
+    function executeCode() {
+        const outCont = document.getElementById('output-container');
+        const webWrapper = document.getElementById('web-wrapper');
+        const webRes = document.getElementById('web-res');
+        const cRes = document.getElementById('c-res');
+        
+        outCont.style.display = "block";
+
+        if (mode === 'c') {
+            webWrapper.style.display = "none";
+            cRes.style.display = "block";
+            const code = document.getElementById('in-c').value;
+            cRes.innerHTML = "<span style='color: orange;'>Compiling...</span>";
+            setTimeout(() => {
+                const match = code.match(/printf\s*\(\s*"(.*?)"\s*\)/);
+                cRes.innerHTML = "<span style='color: #888;'>Console:</span><br>" + (match ? match[1] : "Hello Welcome to C Programming!");
+            }, 500);
+        } else {
+            cRes.style.display = "none";
+            webWrapper.style.display = "block";
+            const html = document.getElementById('in-html').value;
+            const css = document.getElementById('in-css').value;
+            const fullCode = "<html><head><style>" + css + "</style></head><body>" + html + "</body></html>";
+            
+            const doc = webRes.contentWindow.document;
+            doc.open();
+            doc.write(fullCode);
+            doc.close();
+        }
+    }
+
+    function resetEditor() {
+        if(confirm("Futa kila kitu?")) {
+            document.getElementById('in-html').value = '';
+            document.getElementById('in-css').value = '';
+            document.getElementById('in-c').value = '';
+            document.getElementById('output-container').style.display = 'none';
+        }
+    }
+
+    async function saveProject() {
+        let content, ext;
+        if (mode === 'html') { content = document.getElementById('in-html').value; ext = "index.html"; }
+        else if (mode === 'css') { content = document.getElementById('in-css').value; ext = "style.css"; }
+        else { content = document.getElementById('in-c').value; ext = "main.c"; }
+
+        if (!content) return alert("Boksi halina kodi!");
+
+        const blob = new Blob([content], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = ext;
+        a.click();
+        alert("Imehifadhiwa kama " + ext);
+    }
+</script>
