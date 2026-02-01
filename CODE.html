@@ -1,4 +1,4 @@
-<div class="main-container" style="border: 2px solid #6200ea; background: #0a0a0a; padding: 15px; border-radius: 12px; font-family: sans-serif;">
+<div class="main-container" style="border: 2px solid #6200ea; background: #0a0a0a; padding: 15px; border-radius: 12px; font-family: sans-serif; color: white;">
     <span style="color: #6200ea; font-weight: bold; border-left: 4px solid #6200ea; padding-left: 8px;">DEV STUDIO PRO</span>
 
     <div style="display: flex; gap: 4px; margin: 12px 0; background: #1a1a1a; padding: 4px; border-radius: 8px;">
@@ -39,7 +39,7 @@ int main() {
 
     <div style="display: flex; gap: 6px; margin-top: 12px;">
         <button onclick="executeCode()" style="flex: 2; padding: 14px; background: #00c853; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">RUN CODE</button>
-        <button onclick="saveProject()" style="flex: 1.2; background: #2979ff; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">SAVE AS</button>
+        <button onclick="saveProject()" style="flex: 1.5; background: #2979ff; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">SAVE AS...</button>
         <button onclick="resetEditor()" style="flex: 1; background: #444; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">FUTA</button>
     </div>
 
@@ -81,7 +81,7 @@ int main() {
             cRes.innerHTML = "<span style='color: orange;'>Compiling...</span>";
             setTimeout(() => {
                 const match = code.match(/printf\s*\(\s*"(.*?)"\s*\)/);
-                cRes.innerHTML = "<span style='color: #888;'>Console:</span><br>" + (match ? match[1] : "Hello Welcome to C Programming!");
+                cRes.innerHTML = "<span style='color: #888;'>Console Output:</span><br>" + (match ? match[1] : "Hello Welcome to C Programming!");
             }, 500);
         } else {
             cRes.style.display = "none";
@@ -97,29 +97,49 @@ int main() {
         }
     }
 
+    async function saveProject() {
+        let content, ext, mime;
+        if (mode === 'html') { content = document.getElementById('in-html').value; ext = "index.html"; mime = "text/html"; }
+        else if (mode === 'css') { content = document.getElementById('in-css').value; ext = "style.css"; mime = "text/css"; }
+        else { content = document.getElementById('in-c').value; ext = "main.c"; mime = "text/x-csrc"; }
+
+        if (!content) return alert("Boksi halina kodi ya kuhifadhi!");
+
+        // Jaribu kufungua File Picker ya simu
+        if ('showSaveFilePicker' in window) {
+            try {
+                const handle = await window.showSaveFilePicker({
+                    suggestedName: ext,
+                    types: [{
+                        description: mode.toUpperCase() + ' File',
+                        accept: { [mime]: ['.' + ext.split('.')[1]] },
+                    }],
+                });
+                const writable = await handle.createWritable();
+                await writable.write(content);
+                await writable.close();
+                alert("Kazi imehifadhiwa!");
+            } catch (e) {
+                console.log("Save imeahirishwa na mtumiaji.");
+            }
+        } else {
+            // Ikishindikana (kwa simu za zamani), pakua moja kwa moja
+            const blob = new Blob([content], { type: mime });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = ext;
+            a.click();
+            alert("Imehifadhiwa kama " + ext + " kwenye folder la Downloads");
+        }
+    }
+
     function resetEditor() {
-        if(confirm("Futa kila kitu?")) {
+        if(confirm("Je, unafuta kila kitu (Kodi na Output)?")) {
             document.getElementById('in-html').value = '';
             document.getElementById('in-css').value = '';
             document.getElementById('in-c').value = '';
             document.getElementById('output-container').style.display = 'none';
         }
-    }
-
-    async function saveProject() {
-        let content, ext;
-        if (mode === 'html') { content = document.getElementById('in-html').value; ext = "index.html"; }
-        else if (mode === 'css') { content = document.getElementById('in-css').value; ext = "style.css"; }
-        else { content = document.getElementById('in-c').value; ext = "main.c"; }
-
-        if (!content) return alert("Boksi halina kodi!");
-
-        const blob = new Blob([content], { type: "text/plain" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = ext;
-        a.click();
-        alert("Imehifadhiwa kama " + ext);
     }
 </script>
