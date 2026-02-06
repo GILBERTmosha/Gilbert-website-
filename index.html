@@ -6,7 +6,8 @@
 <style>
 body {
  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
- background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+ /* RANGI 1: Background ya Kuvutia (SlateBlue na DarkCyan) */
+ background: linear-gradient(135deg, SlateBlue 0%, DarkCyan 100%);
  min-height: 100vh;
  display: flex;
  flex-direction: column;
@@ -19,7 +20,8 @@ body {
 h1 {
  font-size: 42px;
  margin-bottom: 30px;
- text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+ /* RANGI 2: Kivuli cha maandishi (Gold) */
+ text-shadow: 3px 3px 10px rgba(255, 215, 0, 0.4);
  font-weight: bold;
  text-align: center;
 }
@@ -34,14 +36,14 @@ h1 {
 
 a.button-link {
  display: block;
- background: rgba(255, 255, 255, 0.15);
- backdrop-filter: blur(10px);
+ background: rgba(255, 255, 255, 0.1);
+ backdrop-filter: blur(15px);
  padding: 18px 40px;
  color: white;
  font-size: 18px;
  text-decoration: none;
  border-radius: 50px;
- border: 1px solid rgba(255, 255, 255, 0.3);
+ border: 1px solid rgba(255, 255, 255, 0.4);
  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
  transition: all 0.3s ease;
  text-align: center;
@@ -50,30 +52,32 @@ a.button-link {
 }
 
 a.button-link:hover {
- background: white;
- color: #0072ff;
+ /* RANGI 3: Rangi ya Hover (OrangeRed) */
+ background: OrangeRed;
+ color: white;
  transform: translateY(-5px);
- box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+ border-color: transparent;
 }
 
 /* Contact Card Style */
 .contact-card {
- background: white;
+ background: WhiteSmoke;
  color: #333;
  padding: 30px;
  border-radius: 20px;
  width: 100%;
  max-width: 350px;
- box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+ box-shadow: 0 15px 35px rgba(0,0,0,0.3);
  margin-bottom: 30px;
- border-left: 8px solid #25D366; /* WhatsApp Green */
+ /* RANGI 4: Mpaka wa pembeni (MediumSpringGreen) */
+ border-left: 10px solid MediumSpringGreen;
 }
 
 .contact-card h2 {
  margin-top: 0;
- color: #0072ff;
+ color: DarkSlateBlue;
  font-size: 24px;
- border-bottom: 2px solid #f0f0f0;
+ border-bottom: 2px solid LightGray;
  padding-bottom: 10px;
 }
 
@@ -86,18 +90,18 @@ a.button-link:hover {
 
 .contact-item strong {
  width: 100px;
- color: #555;
+ color: SlateGray;
 }
 
 /* Comment Box Style */
 .comment-box {
- background: #ffffff;
+ background: white;
  color: #333;
  padding: 30px;
  border-radius: 25px;
  width: 100%;
  max-width: 350px;
- box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+ box-shadow: 0 20px 40px rgba(0,0,0,0.4);
  position: relative;
  overflow: hidden;
  text-align: center;
@@ -109,47 +113,34 @@ a.button-link:hover {
  top: 0;
  left: 0;
  width: 100%;
- height: 5px;
- background: linear-gradient(to right, #25D366, #0072ff);
-}
-
-.comment-box h3 {
- margin-top: 0;
- color: #333;
- font-size: 22px;
- margin-bottom: 20px;
+ height: 6px;
+ /* Mchanganyiko wa Rangi zote kuu */
+ background: linear-gradient(to right, MediumSpringGreen, OrangeRed, Gold);
 }
 
 .comment-box input, .comment-box textarea {
  width: 100%;
  padding: 12px 15px;
  margin: 10px 0;
- border: 2px solid #eee;
+ border: 2px solid WhiteSmoke;
  border-radius: 12px;
  box-sizing: border-box;
  font-size: 15px;
- transition: 0.3s;
- background: #f9f9f9;
-}
-
-.comment-box input:focus, .comment-box textarea:focus {
- border-color: #0072ff;
- outline: none;
- background: #fff;
+ background: GhostWhite;
 }
 
 .whatsapp-warning {
  font-size: 11px;
- color: #e74c3c;
+ color: Crimson;
  display: block;
  text-align: left;
  font-weight: bold;
- margin-top: -5px;
  margin-bottom: 5px;
 }
 
 .submit-btn {
- background: linear-gradient(to right, #0072ff, #00c6ff);
+ /* RANGI 5: Kitufe cha kutuma (DeepPink na Purple) */
+ background: linear-gradient(to right, DeepPink, DarkViolet);
  color: white;
  border: none;
  padding: 15px;
@@ -160,12 +151,12 @@ a.button-link:hover {
  font-weight: bold;
  margin-top: 15px;
  transition: 0.3s;
- box-shadow: 0 5px 15px rgba(0,114,255,0.3);
+ box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
 }
 
 .submit-btn:hover {
- transform: scale(1.02);
- box-shadow: 0 8px 20px rgba(0,114,255,0.4);
+ transform: scale(1.03);
+ filter: brightness(1.1);
 }
 </style>
 </head>
@@ -177,21 +168,21 @@ a.button-link:hover {
     <a href="htmlq.html" target="_blank" class="button-link">HTML Questions (101)</a>
     <a href="programq.html" target="_blank" class="button-link">Programming Questions (50)</a>
     <a href="database.html" target="_blank" class="button-link">Database Questions (50)</a>
-     <a href="CODE.html" target="_blank" class="button-link"> RUNNING CODE (50)</a>
+    <a href="CODE.html" target="_blank" class="button-link">RUNNING CODE </a>
 </div>
 
 <div class="contact-card">
   <h2>Contact Info</h2>
   <div class="contact-item">
-    <strong style="color: #25D366;">WhatsApp:</strong> 
+    <strong style="color: MediumSpringGreen;">WhatsApp:</strong> 
     <span>0793770731</span>
   </div>
   <div class="contact-item">
-    <strong style="color: #D44638;">Email:</strong> 
+    <strong style="color: OrangeRed;">Email:</strong> 
     <a href="mailto:kingshamo47@gmail.com" style="color: #333; text-decoration: none;">kingshamo47@gmail.com</a>
   </div>
   <div class="contact-item">
-    <strong style="color: #007AFF;">Phone:</strong> 
+    <strong style="color: DarkViolet;">Phone:</strong> 
     <span>0783983518</span>
   </div>
 </div>
@@ -200,12 +191,9 @@ a.button-link:hover {
     <h3>Leave a Comment</h3>
     <form action="https://formspree.io/f/xqebnevk" method="POST">
         <input type="text" name="full_name" placeholder="Full Name" required>
-        
         <span class="whatsapp-warning">* Must be a WhatsApp number</span>
-        <input type="tel" name="whatsapp_number" placeholder="WhatsApp Number (e.g. 07...)" pattern="[0-9]{10,}" required title="Please enter a valid phone number">
-        
+        <input type="tel" name="whatsapp_number" placeholder="WhatsApp Number (e.g. 07...)" pattern="[0-9]{10,}" required>
         <textarea name="message" placeholder="Write your comments here..." rows="4" required></textarea>
-        
         <button type="submit" class="submit-btn">Send Comment Now</button>
     </form>
 </div>
